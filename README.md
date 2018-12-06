@@ -6,7 +6,7 @@ Augmented Reality Sandbox Project
 >- Sandbox Youtube video:https://www.youtube.com/watch?v=Ki8UXSJmrJE&feature=youtu.be
 >- Sand liquefied Youtube video: https://www.youtube.com/watch?v=CCiIUjPF060&feature=youtu.be
 
-#Software Installation
+# Software Installation
 >- Software Installation
 
 Step 1: Install Linux
