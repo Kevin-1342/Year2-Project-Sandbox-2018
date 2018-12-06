@@ -1,5 +1,9 @@
 # Year2-Project-Sandbox-2018
 Augmented Reality Sandbox Project
+>- Example Instructions
+
+http://idav.ucdavis.edu/~okreylos/ResDev/SARndbox/Instructions.html
+
 >- ![image](https://github.com/KetchumFion/Year2-Project-Sandbox-2018/blob/master/Figure/ARSandboxLayout.png)
 >- ![image](https://github.com/KetchumFion/Year2-Project-Sandbox-2018/blob/master/Figure/Sandbox1.jpg)
 # Materials
@@ -8,6 +12,8 @@ Augmented Reality Sandbox Project
 
 # Software Installation
 >- Software Installation
+
+http://idav.ucdavis.edu/~okreylos/ResDev/SARndbox/SoftwareInstallation.html
 
 Step 1: Install Linux
 
