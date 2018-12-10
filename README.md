@@ -12,6 +12,7 @@ http://idav.ucdavis.edu/~okreylos/ResDev/SARndbox/Instructions.html
 >- CPU: Intel Core i5 or Core i7 CPU running at at least 3GHz
 >- RAM: >4GB
 >- Hard drive: >30GB
+>- Moniter
 
 # Materials
 >- Sandbox Youtube video:https://www.youtube.com/watch?v=Ki8UXSJmrJE&feature=youtu.be
