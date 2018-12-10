@@ -7,7 +7,7 @@ http://idav.ucdavis.edu/~okreylos/ResDev/SARndbox/Instructions.html
 >- ![image](https://github.com/KetchumFion/Year2-Project-Sandbox-2018/blob/master/Figure/ARSandboxLayout.png)
 >- ![image](https://github.com/KetchumFion/Year2-Project-Sandbox-2018/blob/master/Figure/Sandbox1.jpg)
 # Computer
->- PC with Windows operating system(Use VirtualBox install Linux)
+>- PC with Windows operating system(Use VirtualBox install Linux Mint with Mate desktop (18.3 "Sylvia" as of 04/2018))
 >- GPU: Nvidia GeForce(No AMD/ATI), graphics card, GTX 1060 graphics card
 >- CPU: Intel Core i5 or Core i7 CPU running at at least 3GHz
 >- RAM: >4GB
