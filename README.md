@@ -6,6 +6,13 @@ http://idav.ucdavis.edu/~okreylos/ResDev/SARndbox/Instructions.html
 
 >- ![image](https://github.com/KetchumFion/Year2-Project-Sandbox-2018/blob/master/Figure/ARSandboxLayout.png)
 >- ![image](https://github.com/KetchumFion/Year2-Project-Sandbox-2018/blob/master/Figure/Sandbox1.jpg)
+# Computer
+>- PC with Windows operating system(Use VirtualBox install Linux)
+>- GPU: Nvidia GeForce(No AMD/ATI), graphics card, GTX 1060 graphics card
+>- CPU: Intel Core i5 or Core i7 CPU running at at least 3GHz
+>- RAM: >4GB
+>- Hard drive: >30GB
+
 # Materials
 >- Sandbox Youtube video:https://www.youtube.com/watch?v=Ki8UXSJmrJE&feature=youtu.be
 >- Sand liquefied Youtube video: https://www.youtube.com/watch?v=CCiIUjPF060&feature=youtu.be
