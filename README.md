@@ -1,3 +1,3 @@
 # Year2-Project-Sandbox-2018
-Augmented Reality Sandbox Project
+University of Liverpool, year 2 group project, Augmented Reality Sandbox Project
 
