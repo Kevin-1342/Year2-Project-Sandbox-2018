@@ -67,18 +67,66 @@ void ofApp::setup(){
 	shapeGameManager.setKinectRes(kinectRes);
 	shapeGameManager.setKinectROI(kinectROI);
 
-	TestGUI = new ofxDatGui(200, 50);
-	TestGUI->addTextInput("score", "100");
-	TestGUI->addButton("start game!");
-	ofRectangle bounds(100, 100, 500, 500);
-	TestGUI->add2dPad("a", bounds);
-	TestGUI->addMatrix("b", 28);
-	TestGUI->addWaveMonitor("C", 10, 10);
+	
+
+
+	ofGLFWWindowSettings settings;
+	settings.width = 1600; // Default settings
+	settings.height = 800;
+	settings.setPosition(ofVec2f(0, 0));
+	settings.resizable = true;
+	settings.decorated = true;
+	settings.title = "Magic-Sand ";
+	shared_ptr<ofApp> mainApp(new ofApp);
+	shared_ptr<ofAppBaseWindow> thirdWindow = ofCreateWindow(settings);
+	thirdWindow->setWindowShape(1080, 1920);
+
+	ofAddListener(thirdWindow->events().draw, mainApp.get(), &ofApp::drawPcjWindow);
+	mainApp->pcjWindow = thirdWindow;
+
+
+	Lunar_Starter = new ofxDatGui(130, 670);
+	Lunar_Starter->addButton(" ");
+
+	Sandbox_Starter = new ofxDatGui(670, 670);
+	Sandbox_Starter->addButton("  ");
+
+	Sandbox_flood = new ofxDatGui(670, 730);
+	Sandbox_flood->addButton("   ");
+
+	ShapeGame_Starter = new ofxDatGui(130, 1480);
+	ShapeGame_Starter->addButton("   ");
+
+	Triangle_Starter = new ofxDatGui(130, 1530);
+	Triangle_Starter->addButton("   ");
+
+	Square_Starter = new ofxDatGui(130, 1580);
+	Square_Starter->addButton("   ");
+
+	Circle_Starter = new ofxDatGui(130, 1630);
+	Circle_Starter->addButton("   ");
+
+	Lunar_Starter->onButtonEvent(this, &ofApp::onButtonEvent);
+	Sandbox_Starter->onButtonEvent(this, &ofApp::onButtonEvent);
+	ShapeGame_Starter->onButtonEvent(this, &ofApp::onButtonEvent);
+	Triangle_Starter->onButtonEvent(this, &ofApp::onButtonEvent);
+	Square_Starter->onButtonEvent(this, &ofApp::onButtonEvent);
+	Circle_Starter->onButtonEvent(this, &ofApp::onButtonEvent);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
 	// Call kinectProjector->update() first during the update function()
+	if (changeTheme) {
+		changeTheme = false;
+		if (currentTheme == SANDBOX_THEME) {
+			sandSurfaceRenderer->heightMap.loadFile("colorMaps/HeightColorMap.xml");
+		}else if (currentTheme == LUNAR_THEME) {
+			sandSurfaceRenderer->heightMap.loadFile("colorMaps/HeightColorMapL.xml");
+		}
+	}
+
+
 	kinectProjector->update();
 	sandSurfaceRenderer->update();
 	if (shapeGameRunning) {
@@ -113,14 +161,6 @@ void ofApp::draw(){
 	}
 
 	kinectProjector->drawMainWindow(x, y, w, h);
-
-	
-	//ofxDatGuiWaveMonitor* myWaveMonitor = new ofxDatGuiWaveMonitor(string label, float frequency, float amplitude);
-	//ofxDatGuiWaveMonitor* myWaveMonitor;
-	//myWaveMonitor->setFrequency(30);
-	//myWaveMonitor->setAmplitude(10);
-	//myWaveMonitor->setFrequencyLimit(10);
-	//myWaveMonitor->setDrawMode(ofxDatGuiGraph::LINES); //draw mode
 }
 
 void ofApp::drawProjWindow(ofEventArgs &args)
@@ -156,51 +196,171 @@ void ofApp::drawProjWindow(ofEventArgs &args)
 	
 }
 void ofApp::drawPcjWindow(ofEventArgs &args) {
-	//ofSetupScreenPerspective(,1,1,1);
-	//ofSetupScreenOrtho(100, 100, 10, 10);
-	/*int count;
-	GLFWmonitor**monitors = glfwGetMonitors(&count);
-	const GLFWvidmode*desktopMode = glfwGetVideoMode(monitors[windowsNum]);*/
-	string a = "NI Hao";
-	ofGetViewportWidth();
-	ofGetViewportHeight();
-	//https://openframeworks.cc/documentation/graphics/
-	//How to add imagw: https://openframeworks.cc/documentation/graphics/ofImage/#show_ofImage
-	ofImage img("new_picture/lunar1.jpg");             //read the image.
-	img.draw(0, 0);                       //The position of the figure
-	//How to draw: https://openframeworks.cc/documentation/graphics/ofGraphics/
-	ofSetBackgroundColor(255, 255, 255);    //±³¾°É«£¨°×£©
-	ofSetColor(11, 253, 247);               //±ß¿òµÄÑÕÉ«£¿£¿£¿253
-	ofSetLineWidth(5);                      //±ß¿òºñ¶È
-
-	ofNoFill();                             //ÉèÖÃ±ß¿òÄÚÎª¿Õ
-	ofDrawRectangle(50, 70, 500, 1000);     //x, y,¿í,¸ß
-	//How to write
 	ofTrueTypeFont text;
+	//if (UI_start) {
+	//	UI_start = false;
+	//	Lunar_Starter = new ofxDatGui(130, 550);
+	//	Lunar_Starter->addButton("Change to Lunar Theme");
+	//	
+	//	Sandbox_Starter = new ofxDatGui(670, 550);
+	//	Sandbox_Starter->addButton("Change to Sandbox Theme");
 
-	//text.load("ofxbraitsch/fonts/Verdana.ttf", 35);
-	//text.drawString("GameList", 100, 100);
-	text.load("ofxbraitsch/fonts/Verdana.ttf", 40);
-	text.drawString("Creat a shape", 45, 45);
+	//	ShapeGame_Starter = new ofxDatGui(130, 1300);
+	//	ShapeGame_Starter->addButton("Start Shape an Island Game");
+	//	ofRectangle bounds(30, 30, 500, 500);
+	////	TestGUI->add2dPad("Shift to start", bounds);
+	////	TestGUI->addMatrix("Clik to start", 49);
+	////	TestGUI->addWaveMonitor("Lunar Theme", 10, 10);
+	////	TestGUI->onButtonEvent(this, &ofApp::onButtonEvent);
+	//	
+
+	//	Lunar_Starter->onButtonEvent(this, &ofApp::onButtonEvent);
+	//	Sandbox_Starter->onButtonEvent(this, &ofApp::onButtonEvent);
+	//	ShapeGame_Starter->onButtonEvent(this, &ofApp::onButtonEvent);
+	//	
+	//}
+	ofSetBackgroundColor(255, 255, 255);
+	//Lunar image
+	ofImage Img_Lunar("lunar4.png");
+	Img_Lunar.draw(40, 345);     //x,y
+	//Sandbox image
+	ofImage Img_Sandbox("sandbox.png");
+	Img_Sandbox.draw(580, 345);
+	//Shape Island Game
+	ofImage Img_ShapeIsland("shapeGame2.png");
+	Img_ShapeIsland.draw(40, 930);
+
+	ofSetColor(11, 253, 247);
+	ofSetLineWidth(5);
+	ofNoFill();
+	ofSetLineWidth(20);
+	ofSetColor(150, 150, 150);
+	ofDrawRectangle(40, 345, 460, 500);  //x,y
+	ofSetColor(0, 255, 0);
+	ofDrawRectangle(580, 345, 460, 500);
+	ofSetColor(0, 191, 255);
+	ofDrawRectangle(40, 930, 460, 880);
+	ofSetColor(0, 191, 255);
+	ofDrawRectangle(580, 930, 460, 880);
+
+	//introduction
+	ofSetColor(100, 191, 255);
+	ofDrawRectangle(40, 30, 1000, 260);
+
+
+	//lunar start
+	ofSetColor(255, 215, 0);
+	ofSetLineWidth(6);
+	ofDrawRectangle(128, 668, 275, 30);
+	//sandbox start
+	ofSetColor(0, 191, 255);
+	ofSetLineWidth(6);
+	ofDrawRectangle(668, 668, 275, 30);
+	ofDrawRectangle(668, 728, 275, 30);
+
+	//shape game start
+	ofSetColor(248, 248, 255);
+	ofSetLineWidth(6);
+	ofDrawRectangle(128, 1478, 275, 30);
+	ofDrawRectangle(128, 1528, 275, 30);
+	ofDrawRectangle(128, 1578, 275, 30);
+	ofDrawRectangle(128, 1628, 275, 30);
 
 	ofSetColor(255, 0, 0);
-	text.load("ofxbraitsch/fonts/Verdana.ttf", 32);
-	text.drawString("Leaderboard", 60, 110);
+	text.loadFont("verdana.ttf", 10);
+	text.drawString("Click here to start", 700, 670);
+	text.drawString("Click here to start", 160, 670);
+	text.drawString("Click here to flood the water",700,730);
+
+	text.drawString("Click here to create a Triangle", 160, 1530);
+	text.drawString("Click here to create a Square", 160, 1580);
+	text.drawString("Click here to create a Circle", 160, 1630);
+	//Lunar Theme
+
+	ofSetColor(169, 169, 169);
+	text.loadFont("verdana.ttf", 40);
+	text.drawString("Lunar Theme", 70, 405);
 
 
-	ofSetColor(255, 200, 0);
-	text.load("ofxbraitsch/fonts/Verdana.ttf", 24);
-	text.drawString("1. " + a, 75, 160);
-	text.drawString("2. ", 75, 210);
-	text.drawString("3. ", 75, 260);
-	text.drawString("4. ", 75, 310);
-	text.drawString("5. ", 75, 360);
-	text.drawString("6. ", 75, 410);
-	text.drawString("7. ", 75, 460);
-	ofSetColor(255, 255, 255);
+	//Sandbox Theme
+	ofSetColor(0, 255, 127);
+	text.loadFont("verdana.ttf", 34);
+	text.drawString("Sandbox Theme", 630, 405);
 
-	//ofViewport(100,100);
+
+	//Shape an Island Game
+	ofSetColor(255, 69, 0);
+	text.loadFont("verdana.ttf", 25);
+	text.drawString("Shape an Island Game", 70, 970);
+
+	ofSetColor(255, 69, 0);
+	text.loadFont("verdana.ttf", 25);
+	text.drawString("Leaderboard", 610, 970);
+
+	ofSetColor(255, 30, 0);
+	text.loadFont("cooperBlack.ttf", 18);
+	text.drawString("1st. t", 620, 1015);
+	text.drawString("2nd. t", 620, 1065);
+	text.drawString("3rd. t", 620, 1115);
+	text.drawString("4th. t", 620, 1165);
+	/*text.drawString("1st. testName1", 630, 480);
+	text.drawString("2nd. testName2", 630, 530);
+	text.drawString("1st. testName1", 70, 1240);*/
+
+	//introduction
+	ofSetColor(50, 105, 127);
+	text.loadFont("verdana.ttf", 35);
+	text.drawString("Introductions for four areas: ", 50, 80);
+
+	ofSetColor(50, 115, 127);
+	text.loadFont("verdana.ttf", 20);
+	text.drawString("1.Lunar Theme: The sandbox will show the surface of the moon.", 50, 120);
+	text.drawString("2.Sandbox Theme: The sandbox will show the surface of the earth.", 50, 155);
+	text.drawString("3.Shape an Island Game: Choose the shape to create.", 50, 190);
+	text.drawString("4.leaderboard: The similarity check of the shape game.", 50, 225);
+	ofSetColor(255, 255,255);
+
+	ofImage Img_Triangle("Triangle.png");
+	Img_Triangle.draw(410, 1520);     //x,y
+
+	ofImage Img_Square("Square.png");
+	Img_Square.draw(410, 1570);     //x,y
+
+	ofImage Img_Circle("Circle.png");
+	Img_Circle.draw(410, 1620);     //x,y
+	
 }
+
+void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
+	if (e.target->is(" ")) {
+		//myAlert.setTitle("Please input your name");
+		//myAlert.setMessage("It's time to go outside.");
+		//myAlert.show();
+		cout << "Change to Lunar Theme" << endl;
+		//sandSurfaceRenderer->colorMapFile = "HeightColorMapL.xml";
+		//sandSurfaceRenderer->heightMap.loadFile("colorMaps/HeightColorMapL.xml");
+		changeTheme = true;
+		currentTheme = LUNAR_THEME;
+
+		ofxDatGuiThemeCharcoal guiTheme;
+
+		
+
+	}
+	else if (e.target->is("  ")) {
+		cout << "Change to Sandbox Theme" << endl;
+		//sandSurfaceRenderer->heightMap.loadFile("colorMaps/HeightColorMap.xml");
+		changeTheme = true;
+		currentTheme = SANDBOX_THEME;
+	}
+	else if (e.target->is("   ")) {
+		cout << "Shape an Island Game" << endl;
+		shapeGameRunning = !shapeGameRunning;
+		
+	}
+
+}
+
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
@@ -210,11 +370,44 @@ void ofApp::keyPressed(int key){
 		//shapeGameManager.GetActualBinaryLandImage();
 		//ConnectedComponentAnalysis();
 		//matchMap();
+		//ofGLFWWindowSettings settings;
+		//settings.width = 1600; // Default settings
+		//settings.height = 800;
+		//settings.setPosition(ofVec2f(0, 0));
+		//settings.resizable = true;
+		//settings.decorated = true;
+		//settings.title = "Magic-Sand ";
+		//shared_ptr<ofApp> mainApp(new ofApp);
+		//shared_ptr<ofAppBaseWindow> thirdWindow = ofCreateWindow(settings);
+		//thirdWindow->setWindowShape(1080, 1920);
+
+		//ofAddListener(thirdWindow->events().draw, mainApp.get(), &ofApp::drawPcjWindow);
+		//mainApp->pcjWindow = thirdWindow;
+
+
+		//Lunar_Starter = new ofxDatGui(130, 550);
+		//Lunar_Starter->addButton(" ");
+
+		//Sandbox_Starter = new ofxDatGui(670, 550);
+		//Sandbox_Starter->addButton("  ");
+
+		//ShapeGame_Starter = new ofxDatGui(130, 1300);
+		//ShapeGame_Starter->addButton("   ");
+		//Lunar_Starter->onButtonEvent(this, &ofApp::onButtonEvent);
+		//Sandbox_Starter->onButtonEvent(this, &ofApp::onButtonEvent);
+		//ShapeGame_Starter->onButtonEvent(this, &ofApp::onButtonEvent);
+		
+
+
+
+	}
+	else if (key == '1') {
+		
 	}
 	else if (key == 'r') {
 		//cout << "R" << endl;
-		shapeGameRunning = !shapeGameRunning;
-		cout<<"Shape game: "<<shapeGameRunning<<endl;
+		//shapeGameRunning = !shapeGameRunning;
+		//cout<<"Shape game: "<<shapeGameRunning<<endl;
 		//shapeGameManager.GetActualBinaryLandImage();
 		//ofxCvGrayscaleImage BinaryLandImage;
 		//std::string BinOutName = "BinaryLandImage.png";
@@ -224,14 +417,15 @@ void ofApp::keyPressed(int key){
 		//}
 		//ofSaveImage(BinaryLandImage.getPixels(), BinOutName);
 	}
-	//else if (key == 'm') {
+	else if (key == 'm') {
 	//	shapeGameManager.GetActualBinaryLandImage();
 	//	ofxCvGrayscaleImage BinaryLandImage;
 	//	std::string BinOutName = "BinaryLandImage.png";
 	//	//kinectProjector->getBinaryLandImage(BinaryLandImage);
 	//	if (!kinectProjector->getBinaryLandImage(BinaryLandImage)) {
 	//		ofSaveImage(BinaryLandImage.getPixels(), BinOutName);
-	//	}
+		//sandSurfaceRenderer->heightMap.loadFile("colorMaps/HeightColorMapL.xml");
+		}
 	//	
 	//}
 }
